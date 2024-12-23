@@ -5,14 +5,12 @@ import {
   Controller,
   Get,
   Param,
-  ParseBoolPipe,
   ParseIntPipe,
   Patch,
   Post,
-  Query,
-  // HttpCode,
-  // UsePipes,
-  ValidationPipe,
+  // Query,
+  // ParseBoolPipe,
+  // ValidationPipe,
 } from '@nestjs/common';
 
 @Controller('property')
@@ -24,26 +22,13 @@ export class PropertyController {
   }
 
   @Get(':id')
-  getPriorityById(
-    @Param('id', ParseIntPipe) id,
-    @Query('sort', ParseBoolPipe) sort,
-  ) {
-    // console.log(typeof id);
-    console.log(typeof sort);
+  getPriorityById(@Param('id', ParseIntPipe) id) {
     return this.propertyService.getById(id);
   }
 
   @Post('create')
-  // @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
-  // @HttpCode(203)
   setProperty(
-    @Body(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        groups: ['create'],
-      }),
-    )
+    @Body()
     body: createProperty,
   ) {
     return this.propertyService.setProperty(body);
@@ -51,13 +36,7 @@ export class PropertyController {
 
   @Patch(':id')
   updateProperty(
-    @Body(
-      new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        groups: ['update'],
-      }),
-    )
+    @Body()
     body: createProperty,
   ) {
     return this.propertyService.updateProperty(body);
