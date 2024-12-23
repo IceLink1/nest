@@ -1,4 +1,6 @@
 import { createProperty } from './dto/crateProperty.dto';
+import { idParamDto } from './dto/idParam.dto';
+import { ParseIdPipe } from './pipes/parseIdPipe';
 import { PropertyService } from './property.service';
 import {
   Body,
@@ -36,6 +38,8 @@ export class PropertyController {
 
   @Patch(':id')
   updateProperty(
+    // @Param() param: idParamDto,
+    @Param('id', ParseIdPipe) id,
     @Body()
     body: createProperty,
   ) {
