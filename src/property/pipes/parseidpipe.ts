@@ -7,7 +7,7 @@ import {
 
 @Injectable()
 export class ParseIdPipe implements PipeTransform<string, number> {
-  transform(value: string, metadata: ArgumentMetadata): number {
+  transform(value: string, metadata: ArgumentMetadata): any {
     const val = parseInt(value);
     if (isNaN(val)) {
       throw new BadRequestException('id must be a number');

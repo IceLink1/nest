@@ -1,6 +1,8 @@
+import { createPropertySchemas, CreateZodPropertyDto } from './dto/createPropertyZod.dto';
 import { createProperty } from './dto/crateProperty.dto';
 import { idParamDto } from './dto/idParam.dto';
 import { ParseIdPipe } from './pipes/parseIdPipe';
+import { ZodValidationPipe } from './pipes/zodValidationPipe';
 import { PropertyService } from './property.service';
 import {
   Body,
@@ -10,6 +12,7 @@ import {
   ParseIntPipe,
   Patch,
   Post,
+  UsePipes,
   // Query,
   // ParseBoolPipe,
   // ValidationPipe,
@@ -29,9 +32,10 @@ export class PropertyController {
   }
 
   @Post('create')
+  @UsePipes(new ZodValidationPipe(createPropertySchemas))
   setProperty(
     @Body()
-    body: createProperty,
+    body: CreateZodPropertyDto,
   ) {
     return this.propertyService.setProperty(body);
   }

@@ -9,17 +9,17 @@ import { APP_PIPE } from '@nestjs/core';
   controllers: [AppController],
   providers: [
     AppService,
-    {
-      provide: APP_PIPE,
-      useValue: new ValidationPipe({
-        whitelist: true,
-        forbidNonWhitelisted: true,
-        transform: true,
-        transformOptions: {
-          enableImplicitConversion: true,
-        },
-      }),
-    },
+    // {
+    //   provide: APP_PIPE,
+    //   useValue: new ValidationPipe({
+    //     whitelist: true,
+    //     forbidNonWhitelisted: true,
+    //     transform: true,
+    //     transformOptions: {
+    //       enableImplicitConversion: true,
+    //     },
+    //   }),
+    // },
   ],
 })
 export class AppModule {}
